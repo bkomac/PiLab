@@ -11,7 +11,7 @@ var numOnlineUsers;
 console.log('** Starting PiLabServer node on port ' + port + '...');
 
 
-app.use(express.static(__dirname + '/webUI'));
+app.use(express.static(__dirname + '/app'));
 
 io.on('connection', function(socket) {
 	var address = socket.handshake.address;

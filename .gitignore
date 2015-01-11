@@ -1,0 +1,7 @@
+node_modules
+bower_components
+client/dist
+.tmp
+.sass-cache
+client/app/bower_components
+client/app/camera/photos/*.JPG

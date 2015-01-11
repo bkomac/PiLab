@@ -1,9 +1,9 @@
 var gpio = require('rpi-gpio');
 
 var pin   = 7;
-var delay = 2000;
+var delay = 300;
 var count = 0;
-var max   = 3;
+var max   = 20;
 
 gpio.on('change', function(channel, value) {
     console.log('Channel ' + channel + ' value is now ' + value);

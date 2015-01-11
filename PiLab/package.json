@@ -17,6 +17,7 @@
   "readmeFilename": "README.md",
   "dependencies": {
 	  "express": "4.10.2",
-	  "socket.io": "1.2.0"
+	  "socket.io": "1.2.0",
+	  "rpi-gpio" : "0.5.1"
   }
 }

@@ -15,7 +15,8 @@ app.get('/', function(req, res) {
 	res.end('This is socket.io endpoint on port ' + port + ' \n');
 });
 
-app.use(express.static(__dirname + '/app/*'));
+app.use(express.static(__dirname + '/app'));
+app.use(express.static(__dirname + '/app/bower_components'));
 
 io.on('connection', function(socket) {
 	var address = socket.handshake.address;

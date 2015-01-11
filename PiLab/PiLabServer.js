@@ -16,7 +16,7 @@ app.get('/', function(req, res) {
 });
 
 app.use(express.static(__dirname + '/app'));
-app.use(express.static(__dirname + '/app/bower_components'));
+app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 io.on('connection', function(socket) {
 	var address = socket.handshake.address;

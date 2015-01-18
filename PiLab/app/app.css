@@ -1,7 +1,7 @@
 /* app css stylesheet */
 body {
 	padding-top: 50px;
-	padding-bottom: 70px; 
+	padding-bottom: 70px;
 }
 
 #map {
@@ -9,6 +9,23 @@ body {
 	height: 400px;
 }
 
-.white{
+.white {
 	color: white;
+}
+
+#left {
+	float: left;
+	height: 60px;
+	-webkit-transform: rotateZ(180deg);
+	-moz-transform: rotateZ(180deg);
+	-ms-transform : rotateZ(180deg);
+	-o-transform : rotateZ(180deg);
+	transform: rotateZ(180deg);
+	
+}
+
+#right {
+	float: right;
+	height: 60px;
+	
 }

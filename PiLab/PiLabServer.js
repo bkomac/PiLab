@@ -5,6 +5,13 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+var piblaster = require('pi-blaster.js');
+
+var leftMotorFwdGpio = 4;
+var leftMotorRwdGpio = 17;
+var rightMotorFwdGpio = 18;
+var rightMotorRwsGpio = 21;
+
 console.log('** Starting PiLabServer node on port ' + port + '...');
 
 app.use(express.static(__dirname + '/app'));
@@ -24,11 +31,11 @@ io.on('connection', function(socket) {
 	console.log("*** Conecting ... #" + socket.id + " " + socket.request.connection.remoteAddress);
 
 	socket.on('command', function(msg) {
-		//console.log("on command... " + msg.turn);
-		
-		//var msg = JSON.parse(msg);
+		// console.log("on command... " + msg.turn);
+
+		// var msg = JSON.parse(msg);
 		msg.ip = socket.request.connection.remoteAddress;
-		
+		moveCar(msg);
 		socket.broadcast.emit('move', msg);
 	});
 
@@ -37,3 +44,10 @@ io.on('connection', function(socket) {
 http.listen(port, function() {
 	console.log('** PiLabServer listening on:' + port + ' ...');
 });
+
+function moveCar(msg) {
+
+	
+	
+	
+}

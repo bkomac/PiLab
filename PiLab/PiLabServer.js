@@ -47,7 +47,17 @@ http.listen(port, function() {
 
 function moveCar(msg) {
 
-	
-	
-	
+	if (msg.turn > 2) {
+		piblaster.setPwm(leftMotorFwdGpio, msg.turn * 10);
+		piblaster.setPwm(leftMotorRwdGpio, 0);
+	} else if (msg.turn < -2) {
+		piblaster.setPwm(rightMotorFwdGpio, msg.turn * 10);
+		piblaster.setPwm(rightMotorRwsGpio, 0);
+	} else {
+		piblaster.setPwm(leftMotorFwdGpio, 0);
+		piblaster.setPwm(leftMotorRwdGpio, 0);
+		piblaster.setPwm(rightMotorFwdGpio, 0);
+		piblaster.setPwm(rightMotorRwsGpio, 0);
+	}
+
 }

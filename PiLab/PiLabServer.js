@@ -47,10 +47,10 @@ http.listen(port, function() {
 
 function moveCar(msg) {
 
-	if (msg.turn > 2) {
+	if (msg.turn < -2) {
 		piblaster.setPwm(leftMotorFwdGpio, calibrate(msg.turn));
 		piblaster.setPwm(leftMotorRwdGpio, 0);
-	} else if (msg.turn < -2) {
+	} else if (msg.turn > 2) {
 		piblaster.setPwm(rightMotorFwdGpio, calibrate(msg.turn));
 		piblaster.setPwm(rightMotorRwsGpio, 0);
 	} else {

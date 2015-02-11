@@ -48,10 +48,10 @@ http.listen(port, function() {
 function moveCar(msg) {
 
 	if (msg.turn > 2) {
-		piblaster.setPwm(leftMotorFwdGpio, msg.turn * 10);
+		piblaster.setPwm(leftMotorFwdGpio, calibrate(msg.turn));
 		piblaster.setPwm(leftMotorRwdGpio, 0);
 	} else if (msg.turn < -2) {
-		piblaster.setPwm(rightMotorFwdGpio, msg.turn * 10);
+		piblaster.setPwm(rightMotorFwdGpio, calibrate(msg.turn));
 		piblaster.setPwm(rightMotorRwsGpio, 0);
 	} else {
 		piblaster.setPwm(leftMotorFwdGpio, 0);
@@ -60,4 +60,13 @@ function moveCar(msg) {
 		piblaster.setPwm(rightMotorRwsGpio, 0);
 	}
 
+}
+
+function calibrate(turn) {
+
+	var out = turn * 10 + 30;
+	if (out > 100)
+		out = 100;
+
+	return out;
 }

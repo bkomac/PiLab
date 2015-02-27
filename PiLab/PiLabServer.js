@@ -1,4 +1,5 @@
 var port = 5000;
+var version = "1.1";
 
 var express = require('express');
 var app = express();
@@ -53,7 +54,7 @@ io.on('connection', function(socket) {
 });
 
 http.listen(port, function() {
-	console.log('** PiLabServer listening on:' + port + ' ...');
+	console.log('** PiLabServer ' + version + ' listening on:' + port + ' ...');
 });
 
 function moveCar(msg) {

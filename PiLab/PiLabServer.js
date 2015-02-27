@@ -62,27 +62,65 @@ function moveCar(msg) {
 
 	// turn right
 	if (msg.turn < -20) {
-		piblaster.setPwm(rightMotorFwdGpio, calibrate(msg.speed));
-
-		piblaster.setPwm(leftMotorFwdGpio, calibrate(msg.turn));
-		piblaster.setPwm(leftMotorRwdGpio, 0);
-		console.log('Turning right ...' + calibrate(msg.turn) + ' speed ' + calibrate(msg.speed));
+		rightTurn(msg);
 
 		// turn left
 	} else if (msg.turn > 20) {
-		piblaster.setPwm(leftMotorFwdGpio, calibrate(msg.speed));
+		leftTurn(msg);
 
-		piblaster.setPwm(rightMotorFwdGpio, calibrate(msg.turn));
-		piblaster.setPwm(rightMotorRwsGpio, 0);
-		console.log('Turning left ...' + calibrate(msg.turn) + ' speed ' + calibrate(msg.speed));
 	} else {
-		piblaster.setPwm(leftMotorFwdGpio, calibrate(msg.speed));
-		piblaster.setPwm(leftMotorRwdGpio, 0);
-		piblaster.setPwm(rightMotorFwdGpio, calibrate(msg.speed));
-		piblaster.setPwm(rightMotorRwsGpio, 0);
-		console.log('Stopping ...' + calibrate(msg.turn) + ' speed ' + calibrate(msg.speed));
+		if (msg.speed > 0)
+			fwd(msg);
+		else if (msg.speed < 0)
+			rwd(msg);
+		else
+			stop(msg);
 	}
 
+}
+
+function stop(msg) {
+	piblaster.setPwm(leftMotorFwdGpio, 0);
+	piblaster.setPwm(leftMotorRwdGpio, 0);
+
+	piblaster.setPwm(rightMotorFwdGpio, 0);
+	piblaster.setPwm(rightMotorRwsGpio, 0);
+	console.log('Stopping ...' + calibrate(msg.turn) + ' speed ' + calibrate(msg.speed));
+}
+
+function leftTurn(msg) {
+	piblaster.setPwm(leftMotorFwdGpio, 0);
+	piblaster.setPwm(leftMotorRwdGpio, calibrate(msg.turn));
+
+	piblaster.setPwm(rightMotorFwdGpio, calibrate(msg.turn));
+	piblaster.setPwm(rightMotorRwsGpio, 0);
+	console.log('Turning left ...' + calibrate(msg.turn) + ' speed ' + calibrate(msg.speed));
+}
+
+function rightTurn(msg) {
+	// left back
+	piblaster.setPwm(rightMotorRwsGpio, calibrate(msg.turn));
+	piblaster.setPwm(rightMotorFwdGpio, 0);
+
+	piblaster.setPwm(leftMotorFwdGpio, calibrate(msg.turn));
+	piblaster.setPwm(leftMotorRwdGpio, 0);
+	console.log('Turning right ...' + calibrate(msg.turn) + ' speed ' + calibrate(msg.speed));
+}
+
+function fwd(msg) {
+	piblaster.setPwm(leftMotorFwdGpio, calibrate(msg.speed));
+	piblaster.setPwm(leftMotorRwdGpio, 0);
+	piblaster.setPwm(rightMotorFwdGpio, calibrate(msg.speed));
+	piblaster.setPwm(rightMotorRwsGpio, 0);
+	console.log('FWD ...' + calibrate(msg.turn) + ' speed ' + calibrate(msg.speed));
+}
+
+function rwd(msg) {
+	piblaster.setPwm(leftMotorFwdGpio, 0);
+	piblaster.setPwm(leftMotorRwdGpio, calibrate(msg.speed));
+	piblaster.setPwm(rightMotorFwdGpio, 0);
+	piblaster.setPwm(rightMotorRwsGpio, calibrate(msg.speed));
+	console.log('RWD ...' + calibrate(msg.turn) + ' speed ' + calibrate(msg.speed));
 }
 
 function calibrate(turn) {

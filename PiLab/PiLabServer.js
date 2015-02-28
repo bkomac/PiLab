@@ -1,5 +1,5 @@
 var port = 5000;
-var version = "1.1";
+var version = "1.2";
 
 var express = require('express');
 var app = express();
@@ -59,8 +59,6 @@ http.listen(port, function() {
 
 function moveCar(msg) {
 
-	msg.speed = msg.speed * 10;
-
 	// turn right
 	if (msg.turn < -20) {
 		rightTurn(msg);
@@ -70,9 +68,9 @@ function moveCar(msg) {
 		leftTurn(msg);
 
 	} else {
-		if (msg.speed > 0)
+		if (msg.speed < -50 && msg.speed < 0)
 			fwd(msg);
-		else if (msg.speed < 0)
+		else if (msg.speed > 20 && msg.speed > 0)
 			rwd(msg);
 		else
 			stop(msg);

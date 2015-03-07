@@ -19,11 +19,15 @@ var sonicEchoGpio = 26;
 
 console.log('*** Starting PiLabServer node on port ' + port + '...');
 
-var usonic = require('r-pi-usonic');
-var sensor = usonic.sensor(sonicTriggGpio, sonicEchoGpio, 1000);
-setTimeout(function() {
-	console.log('Distance: ' + sensor().toFixed(2) + ' cm');
-}, 60);
+try {
+	var usonic = require('r-pi-usonic');
+	var sensor = usonic.sensor(sonicTriggGpio, sonicEchoGpio, 1000);
+	setTimeout(function() {
+		console.log('Distance: ' + sensor().toFixed(2) + ' cm');
+	}, 60);
+} catch (e) {
+	console.log('Error: ' + e.message);
+}
 
 // app.get('/*', function(req, res) {
 // res.writeHead(200, {

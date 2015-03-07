@@ -21,11 +21,11 @@ console.log('*** Starting PiLabServer node on port ' + port + '...');
 
 try {
 	var usonic = require('r-pi-usonic');
-	var sensor = usonic.createSensor(sonicEchoGpio, sonicTriggGpio, 1000);
+	var sensor = usonic.createSensor(sonicEchoGpio, sonicTriggGpio, 450);
 	var distance = sensor();
 	setTimeout(function() {
 		console.log('Distance: ' + distance + ' cm');
-	}, 60);
+	}, 500);
 } catch (e) {
 	console.log('Error: ' + e.message);
 }

@@ -14,10 +14,16 @@ var leftMotorRwdGpio = 17;
 var rightMotorFwdGpio = 18;
 var rightMotorRwsGpio = 21;
 
-var sonicPingGpio = 1;
-var sonicEchoGpio = 2;
+var sonicTriggGpio = 19;
+var sonicEchoGpio = 26;
 
 console.log('*** Starting PiLabServer node on port ' + port + '...');
+
+var usonic = require('r-pi-usonic');
+var sensor = usonic.sensor(sonicTriggGpio, sonicEchoGpio, 1000);
+setTimeout(function() {
+	console.log('Distance: ' + sensor().toFixed(2) + ' cm');
+}, 60);
 
 // app.get('/*', function(req, res) {
 // res.writeHead(200, {
@@ -72,9 +78,9 @@ function moveCar(msg) {
 
 	} else {
 		if (msg.speed < -50 && msg.speed < 0)
-			fwd(msg);
-		else if (msg.speed > 20 && msg.speed > 0)
 			rwd(msg);
+		else if (msg.speed > 20 && msg.speed > 0)
+			fwd(msg);
 		else
 			stop(msg);
 	}

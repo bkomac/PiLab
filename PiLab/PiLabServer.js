@@ -14,6 +14,9 @@ var leftMotorRwdGpio = 17;
 var rightMotorFwdGpio = 18;
 var rightMotorRwsGpio = 21;
 
+var sonicPingGpio = 1;
+var sonicEchoGpio = 2;
+
 console.log('*** Starting PiLabServer node on port ' + port + '...');
 
 // app.get('/*', function(req, res) {

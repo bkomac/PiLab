@@ -24,7 +24,7 @@ try {
 	var sensor = usonic.createSensor(sonicEchoGpio, sonicTriggGpio, 1000);
 	var distance = sensor();
 	setTimeout(function() {
-		console.log('Distance: ' + distance.toFixed(2) + ' cm');
+		console.log('Distance: ' + distance + ' cm');
 	}, 60);
 } catch (e) {
 	console.log('Error: ' + e.message);

@@ -114,14 +114,14 @@ function leftTurn(msg) {
 	// piblaster.setPwm(leftMotorRwdGpio, calibrate(msg.turn));
 
 	var turnCalculated = calibrate(msg.turn) - 0.2;
-	
+
 	piblaster.setPwm(leftMotorFwdGpio, turnCalculated);
 	piblaster.setPwm(leftMotorRwdGpio, 0);
 
 	// right fwd
 	piblaster.setPwm(rightMotorFwdGpio, calibrate(msg.turn));
 	piblaster.setPwm(rightMotorRwdGpio, 0);
-	console.log('Turning left ...' + turnCalculated + ', speed ' + calibrate(msg.speed));
+	console.log('Turning left ... R:' + turnCalculated + ' L:' + calibrate(msg.turn) + ', speed ' + calibrate(msg.speed));
 }
 
 function rightTurn(msg) {
@@ -130,14 +130,14 @@ function rightTurn(msg) {
 	// piblaster.setPwm(rightMotorFwdGpio, 0);
 
 	piblaster.setPwm(rightMotorRwdGpio, 0);
-	
+
 	var turnCalculated = calibrate(msg.turn) - 0.2;
 	piblaster.setPwm(rightMotorFwdGpio, turnCalculated);
 
 	// left fwd
 	piblaster.setPwm(leftMotorFwdGpio, calibrate(msg.turn));
 	piblaster.setPwm(leftMotorRwdGpio, 0);
-	console.log('Turning right ...' + turnCalculated + ', speed ' + calibrate(msg.speed));
+	console.log('Turning right ... R:' + turnCalculated + ' L:' + calibrate(msg.turn) + ', speed ' + calibrate(msg.speed));
 }
 
 function rwd(msg) {

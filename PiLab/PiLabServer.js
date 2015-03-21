@@ -9,11 +9,11 @@ var url = require('url');
 
 var piblaster = require('pi-blaster.js');
 
-var leftMotorFwdGpio = 17;
-var leftMotorRwdGpio = 4;
+var leftMotorFwdGpio = 4;
+var leftMotorRwdGpio = 17;
 
-var rightMotorFwdGpio = 21;
-var rightMotorRwdGpio = 18;
+var rightMotorFwdGpio = 18;
+var rightMotorRwdGpio = 21;
 
 var sonicTriggGpio = 19;
 var sonicEchoGpio = 26;

@@ -89,10 +89,10 @@ function moveCar(msg) {
 		leftTurn(msg);
 
 	} else {
-		if (msg.speed < -50 && msg.speed < 0)
-			rwd(msg);
-		else if (msg.speed > 20 && msg.speed > 0)
+		if (msg.speed < -20 && msg.speed < 0)
 			fwd(msg);
+		else if (msg.speed > 20 && msg.speed > 0)
+			rwd(msg);
 		else
 			stop(msg);
 	}
@@ -127,20 +127,20 @@ function rightTurn(msg) {
 	console.log('Turning right ...' + calibrate(msg.turn) + ' speed ' + calibrate(msg.speed));
 }
 
-function fwd(msg) {
+function rwd(msg) {
 	piblaster.setPwm(leftMotorFwdGpio, calibrate(msg.speed));
 	piblaster.setPwm(leftMotorRwdGpio, 0);
 	piblaster.setPwm(rightMotorFwdGpio, calibrate(msg.speed));
 	piblaster.setPwm(rightMotorRwsGpio, 0);
-	console.log('FWD ...' + calibrate(msg.turn) + ' speed ' + calibrate(msg.speed));
+	console.log('RWD ...' + calibrate(msg.turn) + ' speed ' + calibrate(msg.speed));
 }
 
-function rwd(msg) {
+function fwd(msg) {
 	piblaster.setPwm(leftMotorFwdGpio, 0);
 	piblaster.setPwm(leftMotorRwdGpio, calibrate(msg.speed));
 	piblaster.setPwm(rightMotorFwdGpio, 0);
 	piblaster.setPwm(rightMotorRwsGpio, calibrate(msg.speed));
-	console.log('RWD ...' + calibrate(msg.turn) + ' speed ' + calibrate(msg.speed));
+	console.log('FWD ...' + calibrate(msg.turn) + ' speed ' + calibrate(msg.speed));
 }
 
 function calibrate(turn) {
@@ -162,7 +162,7 @@ function calibrate(turn) {
 function exitHandler(options, err) {
 	if (options.cleanup) {
 		stop(msg);
-		console.log('** PiLabServer closing down...');
+		console.log('** PiLabServer closing down ...');
 	}
 	if (err)
 		console.log(err.stack);

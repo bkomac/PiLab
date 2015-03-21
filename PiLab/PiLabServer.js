@@ -113,7 +113,7 @@ function leftTurn(msg) {
 	// piblaster.setPwm(leftMotorFwdGpio, 0);
 	// piblaster.setPwm(leftMotorRwdGpio, calibrate(msg.turn));
 
-	piblaster.setPwm(leftMotorFwdGpio, calibrate(msg.speed) - calibrate(msg.turn));
+	piblaster.setPwm(leftMotorFwdGpio, calibrate(msg.turn) - (calibrate(msg.turn)*0.2));
 	piblaster.setPwm(leftMotorRwdGpio, 0);
 
 	// right fwd
@@ -128,7 +128,7 @@ function rightTurn(msg) {
 	// piblaster.setPwm(rightMotorFwdGpio, 0);
 
 	piblaster.setPwm(rightMotorRwdGpio, 0);
-	piblaster.setPwm(rightMotorFwdGpio, calibrate(msg.speed) - calibrate(msg.turn));
+	piblaster.setPwm(rightMotorFwdGpio, calibrate(msg.speed) - (calibrate(msg.turn)*0.2));
 
 	// left fwd
 	piblaster.setPwm(leftMotorFwdGpio, calibrate(msg.turn));

@@ -113,13 +113,15 @@ function leftTurn(msg) {
 	// piblaster.setPwm(leftMotorFwdGpio, 0);
 	// piblaster.setPwm(leftMotorRwdGpio, calibrate(msg.turn));
 
-	piblaster.setPwm(leftMotorFwdGpio, calibrate(msg.turn) - (calibrate(msg.turn) - 0.2));
+	var turnCalculated = calibrate(msg.turn) - 0.2);
+	
+	piblaster.setPwm(leftMotorFwdGpio, turnCalculated);
 	piblaster.setPwm(leftMotorRwdGpio, 0);
 
 	// right fwd
 	piblaster.setPwm(rightMotorFwdGpio, calibrate(msg.turn));
 	piblaster.setPwm(rightMotorRwdGpio, 0);
-	console.log('Turning left ...' + calibrate(msg.turn) + ' speed ' + calibrate(msg.speed));
+	console.log('Turning left ...' + turnCalculated + ', speed ' + calibrate(msg.speed));
 }
 
 function rightTurn(msg) {
@@ -128,12 +130,14 @@ function rightTurn(msg) {
 	// piblaster.setPwm(rightMotorFwdGpio, 0);
 
 	piblaster.setPwm(rightMotorRwdGpio, 0);
-	piblaster.setPwm(rightMotorFwdGpio, calibrate(msg.turn) - (calibrate(msg.turn) - 0.2));
+	
+	var turnCalculated = calibrate(msg.turn) - 0.2);
+	piblaster.setPwm(rightMotorFwdGpio, turnCalculated);
 
 	// left fwd
 	piblaster.setPwm(leftMotorFwdGpio, calibrate(msg.turn));
 	piblaster.setPwm(leftMotorRwdGpio, 0);
-	console.log('Turning right ...' + calibrate(msg.turn) + ' speed ' + calibrate(msg.speed));
+	console.log('Turning right ...' + turnCalculated + ', speed ' + calibrate(msg.speed));
 }
 
 function rwd(msg) {
@@ -141,7 +145,7 @@ function rwd(msg) {
 	piblaster.setPwm(leftMotorRwdGpio, 0);
 	piblaster.setPwm(rightMotorFwdGpio, calibrate(msg.speed));
 	piblaster.setPwm(rightMotorRwdGpio, 0);
-	console.log('RWD ...' + calibrate(msg.turn) + ' speed ' + calibrate(msg.speed));
+	console.log('RWD ...' + calibrate(msg.turn) + ', speed ' + calibrate(msg.speed));
 }
 
 function fwd(msg) {
@@ -149,7 +153,7 @@ function fwd(msg) {
 	piblaster.setPwm(leftMotorRwdGpio, calibrate(msg.speed));
 	piblaster.setPwm(rightMotorFwdGpio, 0);
 	piblaster.setPwm(rightMotorRwdGpio, calibrate(msg.speed));
-	console.log('FWD ...' + calibrate(msg.turn) + ' speed ' + calibrate(msg.speed));
+	console.log('FWD ...' + calibrate(msg.turn) + ', speed ' + calibrate(msg.speed));
 }
 
 function calibrate(turn) {

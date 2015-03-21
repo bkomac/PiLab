@@ -9,10 +9,11 @@ var url = require('url');
 
 var piblaster = require('pi-blaster.js');
 
-var leftMotorFwdGpio = 4;
-var leftMotorRwdGpio = 17;
-var rightMotorFwdGpio = 18;
-var rightMotorRwdGpio = 21;
+var leftMotorFwdGpio = 17;
+var leftMotorRwdGpio = 4;
+
+var rightMotorFwdGpio = 21;
+var rightMotorRwdGpio = 18;
 
 var sonicTriggGpio = 19;
 var sonicEchoGpio = 26;
@@ -90,9 +91,9 @@ function moveCar(msg) {
 
 	} else {
 		if (msg.speed < -20 && msg.speed < 0)
-			fwd(msg);
-		else if (msg.speed > 20 && msg.speed > 0)
 			rwd(msg);
+		else if (msg.speed > 20 && msg.speed > 0)
+			fwd(msg);
 		else
 			stop(msg);
 	}
@@ -121,7 +122,7 @@ function leftTurn(msg) {
 	// right fwd
 	piblaster.setPwm(rightMotorFwdGpio, calibrate(msg.turn));
 	piblaster.setPwm(rightMotorRwdGpio, 0);
-	console.log('Turning left ... R:' + turnCalculated + ' L:' + calibrate(msg.turn) + ', speed ' + calibrate(msg.speed));
+	console.log('Turning left ... R:' + calibrate(msg.turn) + ' L:' + turnCalculated + ', speed ' + calibrate(msg.speed));
 }
 
 function rightTurn(msg) {
@@ -139,20 +140,20 @@ function rightTurn(msg) {
 	console.log('Turning right ... R:' + turnCalculated + ' L:' + calibrate(msg.turn) + ', speed ' + calibrate(msg.speed));
 }
 
-function rwd(msg) {
+function fwd(msg) {
 	piblaster.setPwm(leftMotorFwdGpio, calibrate(msg.speed));
 	piblaster.setPwm(leftMotorRwdGpio, 0);
 	piblaster.setPwm(rightMotorFwdGpio, calibrate(msg.speed));
 	piblaster.setPwm(rightMotorRwdGpio, 0);
-	console.log('RWD ...' + calibrate(msg.turn) + ', speed ' + calibrate(msg.speed));
+	console.log('FWD ...' + calibrate(msg.turn) + ', speed ' + calibrate(msg.speed));
 }
 
-function fwd(msg) {
+function rwd(msg) {
 	piblaster.setPwm(leftMotorFwdGpio, 0);
 	piblaster.setPwm(leftMotorRwdGpio, calibrate(msg.speed));
 	piblaster.setPwm(rightMotorFwdGpio, 0);
 	piblaster.setPwm(rightMotorRwdGpio, calibrate(msg.speed));
-	console.log('FWD ...' + calibrate(msg.turn) + ', speed ' + calibrate(msg.speed));
+	console.log('RWD ...' + calibrate(msg.turn) + ', speed ' + calibrate(msg.speed));
 }
 
 function calibrate(turn) {

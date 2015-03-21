@@ -111,13 +111,13 @@ function stop(msg) {
 
 function leftTurn(msg) {
 	// left back
-	 piblaster.setPwm(leftMotorFwdGpio, 0);
-	 piblaster.setPwm(leftMotorRwdGpio, calibrate(msg.turn));
+//	 piblaster.setPwm(leftMotorFwdGpio, 0);
+//	 piblaster.setPwm(leftMotorRwdGpio, calibrate(msg.turn));
 
 	var turnCalculated = calibrate(msg.turn) - 0.2;
 
-//	piblaster.setPwm(leftMotorFwdGpio, turnCalculated);
-//	piblaster.setPwm(leftMotorRwdGpio, 0);
+	piblaster.setPwm(leftMotorFwdGpio, turnCalculated);
+	piblaster.setPwm(leftMotorRwdGpio, 0);
 
 	// right fwd
 	piblaster.setPwm(rightMotorFwdGpio, calibrate(msg.turn));
@@ -127,12 +127,12 @@ function leftTurn(msg) {
 
 function rightTurn(msg) {
 	// right back
-	 piblaster.setPwm(rightMotorRwdGpio, calibrate(msg.turn));
-	 piblaster.setPwm(rightMotorFwdGpio, 0);
+//	 piblaster.setPwm(rightMotorRwdGpio, calibrate(msg.turn));
+//	 piblaster.setPwm(rightMotorFwdGpio, 0);
 
 	 var turnCalculated = calibrate(msg.turn) - 0.2;
-	// piblaster.setPwm(rightMotorRwdGpio, 0);
-	// piblaster.setPwm(rightMotorFwdGpio, turnCalculated);
+	 piblaster.setPwm(rightMotorFwdGpio, turnCalculated);
+	 piblaster.setPwm(rightMotorRwdGpio, 0);
 
 	// left fwd
 	piblaster.setPwm(leftMotorFwdGpio, calibrate(msg.turn));

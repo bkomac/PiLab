@@ -67,7 +67,7 @@ io.on('connection', function(socket) {
 	socket.emit('connected', {
 		socketId : socket.id,
 		clientIp : socket.request.connection.remoteAddress,
-		serverIp : socket.client
+		serverIp : socket.handshake.address
 	});
 
 	socket.on('command', function(msg) {

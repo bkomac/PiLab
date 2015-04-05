@@ -68,7 +68,6 @@ io.on('connection', function(socket) {
 		socketId : socket.id,
 		clientIp : socket.request.connection.remoteAddress,
 		serverIp : socket.handshake.headers.host,
-		serverPort: port,
 		appVer: version
 	});
 

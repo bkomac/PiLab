@@ -63,7 +63,8 @@ app.use(express.static(__dirname + '/app'));
 io.on('connection', function(socket) {
 	var address = socket.handshake.address;
 	console.log("*** Conecting ... #" + socket.id + " " + socket.request.connection.remoteAddress);
-
+	socket.emit('connected', {sockedId:socket.id, ip:socket.request.connection.remoteAddress});
+	
 	socket.on('command', function(msg) {
 		// console.log("on command... " + msg.turn);
 

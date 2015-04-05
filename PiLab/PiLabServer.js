@@ -63,8 +63,13 @@ app.use(express.static(__dirname + '/app'));
 io.on('connection', function(socket) {
 	var address = socket.handshake.address;
 	console.log("*** Conecting ... #" + socket.id + " " + socket.request.connection.remoteAddress);
-	socket.emit('connected', {sockedId:socket.id, ip:socket.request.connection.remoteAddress});
-	
+	console.log("***"+socket.client);
+	socket.emit('connected', {
+		socketId : socket.id,
+		clientIp : socket.request.connection.remoteAddress,
+		serverIp : request.connection.remoteAddress
+	});
+
 	socket.on('command', function(msg) {
 		// console.log("on command... " + msg.turn);
 
@@ -107,19 +112,19 @@ function stop(msg) {
 
 	piblaster.setPwm(rightMotorFwdGpio, 0);
 	piblaster.setPwm(rightMotorRwdGpio, 0);
-	
+
 	console.log('Stopping ...' + calibrate(msg.turn) + ' speed ' + calibrate(msg.speed));
 }
 
 function leftTurn(msg) {
 	// left back
-	 piblaster.setPwm(leftMotorFwdGpio, 0);
-	 piblaster.setPwm(leftMotorRwdGpio, calibrate(msg.turn));
+	piblaster.setPwm(leftMotorFwdGpio, 0);
+	piblaster.setPwm(leftMotorRwdGpio, calibrate(msg.turn));
 
 	var turnCalculated = calibrate(msg.turn) - 0.2;
 
-//	piblaster.setPwm(leftMotorFwdGpio, turnCalculated);
-//	piblaster.setPwm(leftMotorRwdGpio, 0);
+	// piblaster.setPwm(leftMotorFwdGpio, turnCalculated);
+	// piblaster.setPwm(leftMotorRwdGpio, 0);
 
 	// right fwd
 	piblaster.setPwm(rightMotorFwdGpio, calibrate(msg.turn));
@@ -129,12 +134,12 @@ function leftTurn(msg) {
 
 function rightTurn(msg) {
 	// right back
-	 piblaster.setPwm(rightMotorRwdGpio, calibrate(msg.turn));
-	 piblaster.setPwm(rightMotorFwdGpio, 0);
+	piblaster.setPwm(rightMotorRwdGpio, calibrate(msg.turn));
+	piblaster.setPwm(rightMotorFwdGpio, 0);
 
-	 var turnCalculated = calibrate(msg.turn) - 0.2;
-//	 piblaster.setPwm(rightMotorFwdGpio, turnCalculated);
-//	 piblaster.setPwm(rightMotorRwdGpio, 0);
+	var turnCalculated = calibrate(msg.turn) - 0.2;
+	// piblaster.setPwm(rightMotorFwdGpio, turnCalculated);
+	// piblaster.setPwm(rightMotorRwdGpio, 0);
 
 	// left fwd
 	piblaster.setPwm(leftMotorFwdGpio, calibrate(msg.turn));

@@ -1,5 +1,5 @@
 var port = 5000;
-var version = "1.3";
+var version = "1.4";
 
 var express = require('express');
 var app = express();
@@ -67,7 +67,9 @@ io.on('connection', function(socket) {
 	socket.emit('connected', {
 		socketId : socket.id,
 		clientIp : socket.request.connection.remoteAddress,
-		serverIp : socket.handshake.address
+		serverIp : socket.handshake.headers.host,
+		serverPort: port,
+		appVer: version;
 	});
 
 	socket.on('command', function(msg) {

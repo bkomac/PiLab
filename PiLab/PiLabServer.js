@@ -107,6 +107,8 @@ function stop(msg) {
 
 	piblaster.setPwm(rightMotorFwdGpio, 0);
 	piblaster.setPwm(rightMotorRwdGpio, 0);
+	
+	socket.emit('disconnected', {sockedId:socket.id, ip:socket.request.connection.remoteAddress});
 	console.log('Stopping ...' + calibrate(msg.turn) + ' speed ' + calibrate(msg.speed));
 }
 

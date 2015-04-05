@@ -69,7 +69,7 @@ io.on('connection', function(socket) {
 		clientIp : socket.request.connection.remoteAddress,
 		serverIp : socket.handshake.headers.host,
 		serverPort: port,
-		appVer: version;
+		appVer: version
 	});
 
 	socket.on('command', function(msg) {

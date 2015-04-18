@@ -10,6 +10,6 @@ board.on('ready', function() {
 	console.log("jonny five board ready ...");
 	// Create an Led on pin 7 (GPIO4) on P1 and strobe it on/off
 	// Optionally set the speed; defaults to 100ms
-	(new five.Led('P1-7')).strobe();
+	(new five.Led('GPIO16')).strobe();
 
 });

@@ -12,6 +12,6 @@ board.on('ready', function() {
 	// Optionally set the speed; defaults to 100ms
 	var led = new five.Led('GPIO16');
 	
-	led.blink(50);
+	led.blink(90);
 
 });
